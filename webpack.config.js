@@ -108,6 +108,9 @@ module.exports = {
     fallback: {
       "crypto": require.resolve("crypto-browserify"),
       "stream": require.resolve("stream-browserify")
-    }
+    },
+    // 모듈 지원을 위한 설정 추가
+    extensions: ['.js', '.jsx'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   }
 };
