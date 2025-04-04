@@ -582,17 +582,38 @@
           statusDiv.textContent = `${result.charname}: ${saveResult.message}`;
           statusDiv.style.color = '#ff9800'; // 주황색으로 표시 (경고)
           statusDiv.style.display = 'block'; // 이 경우 간소화 모드에서도 표시
+          
+          // 간소화 모드인 경우 2초 후에 상태 메시지 숨기기
+          if (isSimplifiedMode) {
+            setTimeout(() => {
+              statusDiv.style.display = 'none';
+            }, 2000);
+          }
         } else {
           // 정상 저장된 경우
           statusDiv.textContent = `${result.charname} 데이터가 성공적으로 저장되었습니다.`;
           statusDiv.style.color = '#0f9d58'; // 녹색
           statusDiv.style.display = 'block';
+          
+          // 간소화 모드인 경우 2초 후에 상태 메시지 숨기기
+          if (isSimplifiedMode) {
+            setTimeout(() => {
+              statusDiv.style.display = 'none';
+            }, 2000);
+          }
         }
       } else {
         // 저장 실패한 경우
         statusDiv.textContent = saveResult.message || '데이터 저장 실패. 콘솔을 확인하세요.';
         statusDiv.style.color = '#db4437'; // 빨간색
         statusDiv.style.display = 'block'; // 오류시엔 간소화 모드에서도 표시
+
+        // 간소화 모드인 경우 2초 후에 상태 메시지 숨기기
+        if (isSimplifiedMode) {
+          setTimeout(() => {
+            statusDiv.style.display = 'none';
+          }, 2000);
+        }
       }
     });
     
