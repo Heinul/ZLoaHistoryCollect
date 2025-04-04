@@ -1,128 +1,39 @@
 # ZLoa History Tracker
 
-[한국어 설명서](./사용설명서.md)
+##  프로젝트 소개
+ZLoa History Tracker는 로스트아크 캐릭터의 환산점수를 자동으로 추적하고 저장하는 Chrome 확장 프로그램입니다. 사용자의 캐릭터 정보를 간편하게 기록하고 관리할 수 있습니다.
 
-Chrome extension for tracking and saving character data from zloa.net to Firebase database.
+##  주요 기능
+- 로스트아크 캐릭터 환산점수 자동 저장
+- 캐릭터 히스토리 트래킹
+- 다크/라이트 모드 자동 감지
+- 간소화 모드 제공
 
-## Features
+##  설치 방법
 
-1. Adds a save button on zloa.net character search results
-2. Extracts character data including stats and conversion scores
-3. Saves data to Firebase Realtime Database for future analysis
-4. Prevents duplicate data saving with same conversion score
-5. Detects and prevents saving data with errors
-6. Local cache for better performance and reduced API calls
+#### 1. 프로젝트 다운로드
+1. 이 GitHub 저장소의 최신 릴리즈를 다운로드합니다.
+2. ZIP 파일을 압축 해제합니다.
 
-## Installation for Users
+#### 2. Chrome 확장 프로그램 로드
+1. Chrome 브라우저를 엽니다.
+2. 주소창에 `chrome://extensions/`를 입력합니다.
+3. 우측 상단의 "개발자 모드"를 활성화합니다.
+4. "압축해제된 확장 프로그램 로드" 버튼을 클릭합니다.
+5. 다운로드하여 압축 해제한 폴더를 선택합니다.
 
-1. **Clone or download this repository**
-   - Download the latest release from [Releases](https://github.com/YOUR_USERNAME/ZLoaHistory-Extension/releases)
-   - Or clone the repository and build it yourself (see Development Setup below)
+##  사용 방법
+1. zloa.net 사이트에서 캐릭터 정보를 조회합니다.
+2. 페이지에 자동으로 생성되는 "캐릭터 정보 저장" 버튼을 클릭합니다.
+3. 확장 프로그램 팝업에서 사용설정을 조정할 수 있습니다.
 
-2. **Install in Chrome**
-   - Open `chrome://extensions/` in Chrome
-   - Enable 'Developer mode' (toggle in the top-right corner)
-   - Click 'Load unpacked'
-   - Select the `dist` folder from the downloaded/built extension
+##  설정 옵션
+- 확장 프로그램 사용 여부 토글
+- 간소화 모드 설정
+- 테마 자동 감지
 
-3. **Configure your Firebase credentials**
-   - Copy the `.env.example` file to `.env`
-   - Add your Firebase credentials
-   - Build the extension with `npm run build`
-
-## Development Setup
-
-1. Install dependencies
-```
-npm install
-```
-
-2. Configure .env file
-```
-FIREBASE_API_KEY=YOUR_API_KEY
-FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
-FIREBASE_DATABASE_URL=https://your-project-default-rtdb.firebaseio.com
-FIREBASE_PROJECT_ID=your-project
-FIREBASE_STORAGE_BUCKET=your-project.appspot.com
-FIREBASE_MESSAGING_SENDER_ID=YOUR_MESSAGING_SENDER_ID
-FIREBASE_APP_ID=YOUR_APP_ID
-```
-
-3. Build
-```
-npm run build
-```
-
-4. Load in Chrome
-   - Open `chrome://extensions/`
-   - Enable 'Developer mode'
-   - Click 'Load unpacked'
-   - Select the generated `dist` folder
-
-## Firebase Security Rules
-
-For better security, use these Firebase rules:
-
-```json
-{
-  "rules": {
-    ".read": true,
-    ".write": false,
-    "characters": {
-      "$server": {
-        "$character": {
-          ".read": true,
-          ".write": true
-        }
-      }
-    }
-  }
-}
-```
-
-These rules allow:
-- Reading from anywhere in the database
-- Writing only to specific character paths
-- Prevents unwanted modifications to other parts of the database
-
-## Usage
-
-1. Visit zloa.net
-2. Search for a character
-3. On the results page, click 'Save Character Info'
-4. Check the status of the save operation
-
-## Rate Limiting
-
-The extension implements rate limiting to prevent excessive Firebase usage:
-- Maximum of 5 requests per second
-- Local caching to reduce duplicate requests
-- Skips saving if conversion score hasn't changed
-
-## Data Structure
-
-```javascript
-{
-  "charname": "CharacterName",
-  "server": "ServerName",
-  "converted_zp": 1234.56,
-  "zp_score": 1234.56,   // For compatibility with older versions
-  "temlv": 1680.0,
-  "class": "ClassName",
-  "build": "BuildName",
-  "calculated_at": "CalculationTime",
-  "observed_at": "SavedTime(ISO format)",
-  "receipt": {
-    "초월": 29.77,
-    "장비": 52.88,
-    // ... other receipt data
-  }
-}
-```
-
-## Notes
-
-- This extension is for personal use and data collection
-- Make sure to properly configure the .env file before deployment
-- If you fork this project, you should create your own Firebase project
-- Never commit your `.env` file or API keys to the repository
+##  개발 환경
+- Chrome 확장 프로그램
+- JavaScript
+- Webpack
+- Chrome Extension API
