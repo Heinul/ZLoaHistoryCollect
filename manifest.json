@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ZLoa History Tracker",
   "version": "1.0.0",
-  "description": "로스트아크 캐릭터 정보를 조회 후 파이어베이스에 저장하는 확장 프로그램",
+  "description": "즐로아 스팩 로그 수집기",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

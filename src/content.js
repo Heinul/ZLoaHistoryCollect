@@ -586,7 +586,7 @@
           // 정상 저장된 경우
           statusDiv.textContent = `${result.charname} 데이터가 성공적으로 저장되었습니다.`;
           statusDiv.style.color = '#0f9d58'; // 녹색
-          statusDiv.style.display = isSimplifiedMode ? 'none' : 'block';
+          statusDiv.style.display = 'block';
         }
       } else {
         // 저장 실패한 경우

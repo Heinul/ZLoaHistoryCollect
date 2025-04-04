@@ -1,7 +1,7 @@
 {
   "name": "zloa-history-tracker",
   "version": "1.0.0",
-  "description": "캐릭터 조회 후 파이어베이스에 저장하는 확장 프로그램",
+  "description": "즐로아 스팩 로그 수집기",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch",
