@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ZLoa History Tracker</title>
+  <style>
+    /* 기본 라이트 모드 */
+    body {
+      --bg-primary: white;
+      --bg-secondary: #f4f4f4;
+      --text-primary: black;
+      --text-secondary: #333;
+      --border-color: #ddd;
+      --toggle-bg: #ccc;
+      --toggle-active-bg: #1F2641;
+    }
+
+    /* 다크 모드 */
+    body.dark {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #2a2a2a;
+      --text-primary: #e0e0e0;
+      --text-secondary: #b0b0b0;
+      --border-color: #444;
+      --toggle-bg: #555;
+      --toggle-active-bg: #1F2641;
+    }
+
+    body {
+      width: 300px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 10px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .container {
+      background-color: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    #statusMessage {
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 4px;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    
+    .version-info {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 12px;
+    }
+    
+    .info-text {
+      margin: 8px 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ZLoa History Tracker</h2>
+    
+    <div class="setting-row">
+      <span>확장 프로그램 사용</span>
+      <label class="toggle">
+        <input type="checkbox" id="extensionUsageToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    
+    <div class="setting-row">
+      <span>간소화 모드</span>
+      <label class="toggle">
+        <input type="checkbox" id="simplifiedModeToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    
+    <p style="font-size: 12px; color: #666; margin-top: 10px;">
+      화면 테마는 zloa.net의 테마에 따라 자동으로 변경됩니다.
+    </p>
+  
+  <div id="statusMessage" style="color: green; margin-top: 10px;"></div>
+  
+  <div class="version-info">
+    버전: 1.0.2 | 업데이트: 2025.04.04
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

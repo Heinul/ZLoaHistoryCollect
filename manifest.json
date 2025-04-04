@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "ZLoa History Tracker",
+  "version": "1.0.0",
+  "description": "로스트아크 캐릭터 정보를 조회 후 파이어베이스에 저장하는 확장 프로그램",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "permissions": [
+    "storage", 
+    "activeTab", 
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://zloa.net/*", 
+    "https://loaspeclog-default-rtdb.firebaseio.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://zloa.net/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["*.png", "*.svg", "*.js"],
+      "matches": ["*://zloa.net/*"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
