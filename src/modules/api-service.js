@@ -24,9 +24,12 @@ async function fetchCharacterData() {
         throw new Error("URL에서 캐릭터 이름을 추출할 수 없습니다.");
       }
       
-      // 캐릭터 이름이 이미 인코딩되어 있을 수 있으므로 디코딩 후 다시 인코딩
       const charName = decodeURIComponent(charNameMatch[1]);
-      const encodedCharName = encodeURIComponent(charName);
+      
+      // 영어와 숫자는 인코딩하지 않고, 한글과 특수문자만 인코딩
+      const encodedCharName = charName.replace(/[^a-zA-Z0-9]/g, match => {
+        return encodeURIComponent(match);
+      });
       
       // API URL 생성
       apiUrl = `https://api.zloa.net/zp/char/${encodedCharName}`;
