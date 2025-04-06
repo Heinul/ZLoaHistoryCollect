@@ -40,6 +40,35 @@ const FirebaseService = {
         throw new Error(`Firebase 저장 실패: ${response.status} ${response.statusText}`);
       }
       
+      // 마지막 쓰기 시간 업데이트 - 쓰기 제한을 위해
+      try {
+        const pathParts = path.split('/');
+        if (pathParts.length >= 3) {
+          const server = pathParts[1];
+          const character = pathParts[2];
+          const characterBasePath = `characters/${server}/${character}`;
+          
+          const lastWriteUrl = `${FirebaseAuthManager.getDatabaseUrl()}/${characterBasePath}/lastWrite.json`;
+          
+          console.log(`[Background] lastWrite 업데이트: ${lastWriteUrl}`);
+          
+          const lastWriteResponse = await fetch(lastWriteUrl, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Date.now())
+          });
+          
+          if (!lastWriteResponse.ok) {
+            console.warn(`[Background] lastWrite 업데이트 실패: ${lastWriteResponse.status}`);
+          }
+        }
+      } catch (lastWriteError) {
+        console.error(`[Background] lastWrite 업데이트 오류:`, lastWriteError);
+        // 주요 데이터는 저장되었으므로 이 오류는 무시
+      }
+      
       const result = await response.json();
       console.log(`[Background] Firebase 저장 성공`);
       return { success: true, message: "Firebase에 저장됨" };
