@@ -18,6 +18,9 @@ const FirebaseAuthManager = {
   // 기본 화이어베이스 설정 정보
   config: firebaseConfig,
   
+  // 인증 토큰
+  authToken: process.env.FIREBASE_AUTH_TOKEN,
+  
   // Firebase 데이터베이스 URL 가져오기 함수
   getDatabaseUrl() {
     return this.config.databaseURL;

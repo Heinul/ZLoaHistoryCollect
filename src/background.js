@@ -8,6 +8,9 @@ import FirebaseAuthManager from './firebase-config';
 const FirebaseService = {
   // Firebase REST API를 사용하여 데이터 저장
   async saveToFirebase(path, data) {
+    // 인증 토큰 및 타임스탬프 추가
+    data.authToken = FirebaseAuthManager.authToken;
+    data.lastWrite = Date.now();
     console.log(`[Background] Firebase 저장 시도: ${path}`);
     
     try {

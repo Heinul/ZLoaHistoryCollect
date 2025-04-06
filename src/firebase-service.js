@@ -3,6 +3,9 @@ import FirebaseAuthManager from './firebase-config';
 
 // Firebase에 데이터 저장하는 함수
 export async function saveData(path, data) {
+  // 인증 토큰 및 타임스탬프 추가
+  data.authToken = FirebaseAuthManager.authToken;
+  data.lastWrite = Date.now();
   try {
     // 인증 된 URL을 사용하여 API 호출
     const url = FirebaseAuthManager.getAuthenticatedUrl(path);
