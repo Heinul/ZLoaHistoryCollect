@@ -198,6 +198,14 @@ async function saveCharacterData(data) {
           lastSavedTime = new Date().toLocaleString();
           resolve({ success: true, message: "저장 성공" });
         } else {
+          // 실패 시 캐시 삭제 (재시도 가능하도록)
+          const cacheKey = `zloa_${data.charname}_${data.server}_score`;
+          try {
+            sessionStorage.removeItem(cacheKey);
+            console.log(`[ZLoa History Tracker] 저장 실패로 캐시 삭제: ${cacheKey}`);
+          } catch (e) {
+            console.error("[ZLoa History Tracker] 캐시 삭제 오류:", e);
+          }
           resolve({ success: false, message: "저장 실패" });
         }
       });

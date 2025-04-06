@@ -233,15 +233,20 @@ async function handleSaveButtonClick(statusDiv) {
     }
   } else {
     // 저장 실패한 경우
-    statusDiv.textContent = saveResult.message || '데이터 저장 실패. 콘솔을 확인하세요.';
+    statusDiv.textContent = saveResult.message || '데이터 저장 실패. 재시도하려면 버튼을 다시 클릭하세요.';
     statusDiv.style.color = '#db4437'; // 빨간색
     statusDiv.style.display = 'block'; // 오류시엔 간소화 모드에서도 표시
     
-    // 간소화 모드인 경우에도 오류는 2초 후 숨김
+    // 5초 후에 메시지 숨김 (재시도 할 시간 제공)
+    setTimeout(() => {
+      statusDiv.textContent = '재시도를 위해 버튼을 다시 클릭하세요.';
+    }, 5000);
+    
+    // 간소화 모드인 경우에도 오류는 8초 후 숨김
     if (isSimplifiedMode) {
       setTimeout(() => {
         statusDiv.style.display = 'none';
-      }, 2000);
+      }, 8000);
     }
   }
 }
