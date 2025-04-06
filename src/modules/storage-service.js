@@ -170,6 +170,12 @@ async function saveCharacterData(data) {
     // API 응답에서 converted_zp 또는 zp_score 필드를 사용
     const scoreToCompare = data.converted_zp !== undefined ? data.converted_zp : data.zp_score;
     
+    // 환산점수가 없거나 0인 경우 저장하지 않음
+    if (scoreToCompare === undefined || scoreToCompare === null || scoreToCompare === 0 || scoreToCompare === '') {
+      console.log("[ZLoa History Tracker] 환산점수가 없어 저장을 건너뜁니다.", scoreToCompare);
+      return { success: true, skipped: true, message: "환산점수가 없어 저장을 건너뜁니다." };
+    }
+    
     const isSameScore = await checkPreviouslySavedData(data.charname, data.server, scoreToCompare);
     if (isSameScore) {
       return { success: true, skipped: true, message: "환산점수가 변경되지 않아 저장을 건너뜁니다." };
