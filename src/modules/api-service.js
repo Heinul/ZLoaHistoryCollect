@@ -26,8 +26,8 @@ async function fetchCharacterData() {
       
       const charName = decodeURIComponent(charNameMatch[1]);
       
-      // 영어와 숫자는 인코딩하지 않고, 한글과 특수문자만 인코딩
-      const encodedCharName = charName.replace(/[^a-zA-Z0-9]/g, match => {
+      // 영어는 모두 소문자로 변환하고, 영어와 숫자는 인코딩하지 않고, 한글과 특수문자만 인코딩
+      const encodedCharName = charName.toLowerCase().replace(/[^a-z0-9]/g, match => {
         return encodeURIComponent(match);
       });
       
